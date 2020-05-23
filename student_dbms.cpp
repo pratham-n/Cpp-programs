@@ -22,7 +22,7 @@ int main()
     char nfirst_name[50], nlast_name[50];
     long int rec_size;
     
-    //opening the .txt file for storing the info
+    //opening the .bin file for storing the info
     fptr = fopen("Students.bin","rb+");
 
     if (fptr == NULL)
