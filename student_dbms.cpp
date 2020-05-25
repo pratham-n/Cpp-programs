@@ -23,7 +23,7 @@ FILE *fp;
 //function to enter student data
 void student_write(){
 
-	fp = fopen("student.dat","ab");
+	fp = fopen("students.dat","ab");
 	cout << "\n\t\tPlease enter the details of the student: ";
 	cout << "\n\t\tEnter the Roll Number: ";
 	cin >> s.roll;
@@ -72,7 +72,7 @@ void display_all(){
 
 	system("cls");
 	cout << "\n\t\tDISPLAYING ALL RECORDS!";
-	fp = fopen("student.dat","rb");
+	fp = fopen("students.dat","rb");
 	if(fp==NULL){
 
 		cout << "\n\t\tNO RECORDS EXIST!";
@@ -100,7 +100,7 @@ void display_all(){
 void display_student(int n){
 
 	int flag=0;
-	fp = fopen("student.dat", "rb");
+	fp = fopen("students.dat", "rb");
 	while((fread(&s, sizeof(s), 1, fp))>0){
 
 		if(s.roll==n){
@@ -133,7 +133,7 @@ void student_modify(){
 	cout << "\n\t\tMODIFY SCREEN";
 	cout << "\n\t\tPlease enter the Roll Number of the student to modify: ";
 	cin >> num;
-	fp = fopen("student.dat","rb+");
+	fp = fopen("students.dat","rb+");
 	while(((fread(&s, sizeof(s), 1, fp))>0)&&flag==0){
 
 		if (s.roll==num){
@@ -196,6 +196,7 @@ void student_modify(){
 
 		cout << "\n\t\tRECORD NOT FOUND!";
 	}
+	getch();
 }
 
 //function to delete student details
@@ -207,7 +208,7 @@ void student_delete(){
 	cout << "\n\t\tDELETE RECORD";
 	cout << "\n\t\tEnter Roll Number of student to delete: ";
 	cin >> num;
-	fp = fopen("student.dat", "rb");
+	fp = fopen("students.dat", "rb");
 	fp2 = fopen("temp.dat", "wb");
 	rewind(fp);
 	while((fread(&s, sizeof(s), 1, fp))>0){
@@ -219,8 +220,8 @@ void student_delete(){
 	}
 	fclose(fp);
 	fclose(fp2);
-	remove("student.dat");
-	rename("temp.dat", "student.dat");
+	remove("students.dat");
+	rename("temp.dat", "students.dat");
 	cout << "\n\t\tRECORD DELETED!";
 	getch();
 }
@@ -229,7 +230,7 @@ void student_delete(){
 void class_result(){
 
 	system("cls");
-	fp = fopen("student.dat", "rb");
+	fp = fopen("students.dat", "rb");
 	if(fp==NULL){
 
 		cout << "\n\t\tERROR! FILE COULD NOT BE OPENED! RETURN TO THE ENTRY MENU TO CREATE AN ENTRY";
@@ -324,10 +325,10 @@ void entry_menu(){
 		case '4': student_modify();
 				  break;
 
-		case '6': student_delete();
+		case '5': student_delete();
 				  break;
 
-		case '7': break;
+		case '6': break;
 
 		default: cout << "\a";
 				 entry_menu();
